@@ -1,6 +1,8 @@
 'use strict';
 require('dotenv').config();
 const express     = require('express');
+const helmet      = require('helmet');
+const bcrypt      = require('bcrypt');
 const bodyParser  = require('body-parser');
 const cors        = require('cors');
 
