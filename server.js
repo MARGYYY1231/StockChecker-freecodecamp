@@ -11,6 +11,14 @@ const runner            = require('./test-runner');
 
 const app = express();
 
+app.use(helmet, contentSecurityPolicy({
+  directives:{
+    defaultSrc:["'self'"],
+    scriptSrc: ["'self'", "https://code.jquery.com/jquery-2.2.1.min.js"],
+    stylesRC: ["'self'"]
+  }
+}));
+
 app.use('/public', express.static(process.cwd() + '/public'));
 
 app.use(cors({origin: '*'})); //For FCC testing purposes only
