@@ -23,6 +23,15 @@ async function findStock(stock) {
   return await StockModel.findOne({symbol: stock}).exec();
 }
 
+/**
+ * Creates a new StockModel
+ * If if like has been ticked then gets the IP address
+ * otherwise empty.
+ * @param {*} stock 
+ * @param {*} like 
+ * @param {*} ip 
+ * @returns 
+ */
 async function makeStock(stock, like, ip) {
   const newStock = new StockModel({
     symbol: stock,
@@ -79,6 +88,37 @@ module.exports = function (app) {
         //Save the Stocks to Database
         const firstStock = await saveStock(stock[0], like, req.ip);
         const secondStock = await saveStock(stock[1], like, req.ip);
+
+        let stockData = [];
+        //If Symbol is not present to not throw error just show the relative likes
+        //if symbol is present show all the data
+        if(!symbol){
+          stockData.push({
+            rel_likes: firstStock.likes.length - secondStock.likes.length,
+          });
+        }else{
+          stockData.push({
+            stock: symbol,
+            price: latestPrice,
+            rel_likes: firstStock.likes.length - secondStock.likes.length,
+          });
+        }
+
+        if(!symbol2){
+          stockData.push({
+            rel_likes: secondStock.likes.length - firstStock.likes.length,
+          });
+        }else{
+          stockData.push({
+            stock: symbol2,
+            price: latestPrice2,
+            rel_likes: secondStock.likes.length - firstStock.likes.length,
+          });
+        }
+        res.json({
+          stockData,
+        });
+        return;
       }
 
 
