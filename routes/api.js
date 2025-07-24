@@ -1,4 +1,6 @@
 'use strict';
+const StockModel = require("../models").Stock;
+const fetch = require("node-fetch");
 
 module.exports = function (app) {
 
