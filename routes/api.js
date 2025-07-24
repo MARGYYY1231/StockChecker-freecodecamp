@@ -24,7 +24,12 @@ async function findStock(stock) {
 }
 
 async function makeStock(stock, like, ip) {
-  
+  const newStock = new StockModel({
+    symbol: stock,
+    likes: like ? [ip] : [],
+  });
+  const savedNew = newStock.save()
+  return savedNew;
 }
 
 /**
