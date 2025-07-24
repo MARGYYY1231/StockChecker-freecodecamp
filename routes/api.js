@@ -23,6 +23,10 @@ async function findStock(stock) {
   return await StockModel.findOne({symbol: stock}).exec();
 }
 
+async function makeStock(stock, like, ip) {
+  
+}
+
 /**
  * Save Stock
  * @param {*} stock 
@@ -36,9 +40,11 @@ async function saveStock(stock, like, ip) {
 
   //If Doesnt return anything
   if(!foundStock){
-    
+    const makeSaved = await makeStock(stock, like, ip);
+    saved = makeSaved;
+    return saved;
   }else{
-    //If returns a stock
+    //If found returns a stock
     if(like && foundStock.likes.indexOf(ip) === -1){
       foundStock.likes.push(ip);
     }
