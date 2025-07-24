@@ -121,8 +121,17 @@ module.exports = function (app) {
         return;
       }
 
-
       //If Only one
+      const oneStockData = await saveStock(symbol, like, req.ip);
+      console.log("One Stock Data", oneStockData);
+
+      res.json({
+        stockData: {
+          stovck: symbol,
+          price: latestPrice,
+          likes: oneStockData.likes.length,
+        },
+      });
     });
     
 };
