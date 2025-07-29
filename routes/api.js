@@ -122,6 +122,12 @@ module.exports = function (app) {
       }
 
       //If Only one
+      const { symbol, latestPrice } = await getStock(stock);
+      if (!symbol) {
+        res.json({ stockData: { likes: like ? 1 : 0 } });
+        return;
+      }
+
       const oneStockData = await saveStock(symbol, like, req.ip);
       console.log("One Stock Data", oneStockData);
 
