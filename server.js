@@ -17,13 +17,14 @@ require("./db-connection");
 const app = express();
 
 //Create CSP
-app.use(helmet, contentSecurityPolicy({
-  directives:{
-    defaultSrc:["'self'"],
-    scriptSrc: ["'self'", "https://code.jquery.com/jquery-2.2.1.min.js"],
-    stylesRC: ["'self'"]
-  }
-}));
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", "https://code.jquery.com/jquery-2.2.1.min.js"],
+      styleSrc: ["'self'"],
+    },
+  }));
 
 app.use('/public', express.static(process.cwd() + '/public'));
 
