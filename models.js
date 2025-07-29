@@ -1,9 +1,10 @@
-// models/Stock.js
 const mongoose = require("mongoose");
+const { Schema } = mongoose;
 
-const stockSchema = new mongoose.Schema({
+const StockSchema = new Schema({
   symbol: { type: String, required: true },
-  likes: { type: [String], default: [] }, // store IPs or user IDs
+  likes: { type: [String], default: [] },
 });
+const Stock = mongoose.model("Stock", StockSchema);
 
-module.exports = mongoose.model("Stock", stockSchema);
+exports.Stock = Stock;
