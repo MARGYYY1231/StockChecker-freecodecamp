@@ -1,6 +1,8 @@
 'use strict';
 require('dotenv').config();
 const express     = require('express');
+
+//Add Helmet
 const helmet      = require('helmet');
 const bodyParser  = require('body-parser');
 const cors        = require('cors');
@@ -9,8 +11,12 @@ const apiRoutes         = require('./routes/api.js');
 const fccTestingRoutes  = require('./routes/fcctesting.js');
 const runner            = require('./test-runner');
 
+// Establishes Database connection
+require("./db-connection");
+
 const app = express();
 
+//Create CSP
 app.use(helmet, contentSecurityPolicy({
   directives:{
     defaultSrc:["'self'"],
