@@ -122,7 +122,7 @@ module.exports = function (app) {
       }
 
       //If Only one
-      const { symbol, latestPrice } = await createStock(stock);
+      const { symbol, latestPrice } = await aquireStock(stock);
       if (!symbol) {
         res.json({ stockData: { likes: like ? 1 : 0 } });
         return;
