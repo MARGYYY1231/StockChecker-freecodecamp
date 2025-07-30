@@ -10,7 +10,7 @@ const fetch = require("node-fetch");
  */
 async function aquireStock(stock) {
   const resp = await fetch(`https://stock-price-checker-proxy.freecodecamp.rocks/v1/stock/${stock}/quote`);
-  const {symbol, latestPrice } = await resp.json;
+  const {symbol, latestPrice } = await resp.json();
   return {symbol, latestPrice};
 }
 
@@ -37,8 +37,7 @@ async function makeStock(stock, like, ip) {
     symbol: stock,
     likes: like ? [ip] : [],
   });
-  const savedNew = newStock.save()
-  return savedNew;
+  return newStock.save()
 }
 
 /**
