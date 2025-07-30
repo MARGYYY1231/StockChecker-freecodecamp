@@ -133,7 +133,7 @@ module.exports = function (app) {
 
       res.json({
         stockData: {
-          stovck: symbol,
+          stock: symbol,
           price: latestPrice,
           likes: oneStockData.likes.length,
         },
