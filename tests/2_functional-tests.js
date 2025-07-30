@@ -51,7 +51,24 @@ suite('Functional Tests', function() {
     
     //Viewing one stock and liking it again
     test('Viewing one stock and liking it again', function(done){
+        chai.request(server)
+        .get('/api/stock-prices/')
+        .query({stock : 'GOLD', like : true})
+        .end((err, res) => {
+            assert.equal(res.status, 200);
+            
+            assert.property(res.body, 'stockData');
+            assert.property(res.body.stockData, 'stock');
+            assert.property(res.body.stockData, 'price');
+            assert.property(res.body.stockData, 'likes');
 
+            assert.equal(res.body.stockData.stock, 'GOLD');
+            assert.isNumber(res.body.stockData.likes);
+            assert.equal(res.body.stockData.likes, 1);
+            assert.exists(res.body.stockData.price, 'GOLD has a price.');
+
+            done();
+        });
     });
 
     //Viewing two stocks
