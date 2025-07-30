@@ -91,6 +91,8 @@ module.exports = function (app) {
         let stockData = [];
         //If Symbol is not present to not throw error just show the relative likes
         //if symbol is present show all the data
+        console.log("first_likes: ", firstStock.likes.length);
+        console.log("second_likes: ", secondStock.likes.length);
         if(!symbol){
           stockData.push({
             rel_likes: firstStock.likes.length - secondStock.likes.length,
