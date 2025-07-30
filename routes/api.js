@@ -50,7 +50,7 @@ async function makeStock(stock, like, ip) {
  */
 async function saveStock(stock, like, ip) {
   let saved = {};
-  const foundStock = findStock(stock);
+  const foundStock = await findStock(stock);
 
   //If Doesnt return anything
   if(!foundStock){
